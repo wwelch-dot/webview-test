@@ -6,10 +6,18 @@
 
 <body>
 	<p>Geolocation test</p>
-	<p id="results"></p>
+	<p id="results">
+		Latitude: <span id="latitude"></span><br/>
+		Longitude: <span id="longitude"></span><br/>
+		Accuracy: <span id="accuracy"></span>
+	</p>
 	<script>
 		function locSuccess(position) {
-			document.getElementById("results").innerText = JSON.stringify(position);
+			const fields = ['latitude','longitude','accuracy'];
+			
+			fields.forEach(field => {
+				document.getElementById(field).innerHTML = position.coords[field];
+			});
 		}
 		function locError(error) {
 			console.error(error);
