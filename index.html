@@ -14,7 +14,7 @@
 	<script>
 		function locSuccess(position) {
 			const fields = ['latitude','longitude','accuracy'];
-			
+
 			fields.forEach(field => {
 				document.getElementById(field).innerHTML = position.coords[field];
 			});
@@ -23,7 +23,7 @@
 			console.error(error);
 		}
 		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(locSuccess, locError, {enableHighAccuracy: true, maximumAge: 0, timeout: 10000});
+			navigator.geolocation.getCurrentPosition(locSuccess, locError, {enableHighAccuracy: true, maximumAge: 0, timeout: Infinity});
 		}
 	</script>
 </body>
