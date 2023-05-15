@@ -18,6 +18,7 @@
 			background-color: #009969;
 			color: white;
 			padding: 5px;
+			border: none;
 		}
 	</style>
 </head>
@@ -30,11 +31,14 @@
 			Longitude: <span id="longitude"></span><br />
 			Accuracy: <span id="accuracy"></span>
 		</p>
-		<button type="button" id="btnGetLoc">Fetch Location</button>
+		<button type="button" id="btnGetLoc" onclick="getLocation">Fetch Location</button>
 	</main>
 	<div id="map"></div>
 	<script type="module">
 		import leaflet from "https://cdn.jsdelivr.net/npm/leaflet@1.9.3/+esm";
+
+		let map = null;
+		const markerGroup = L.markerGroup();
 
 		function locSuccess(position) {
 			const fields = ['latitude', 'longitude', 'accuracy'];
@@ -43,13 +47,18 @@
 				document.getElementById(field).innerHTML = position.coords[field];
 			});
 
-			var map = leaflet.map('map').setView([position.coords.latitude, position.coords.longitude], 19);
+			if (map == null) {
+				var map = leaflet.map('map').setView([position.coords.latitude, position.coords.longitude], 19);
 
-			L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-				attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-			}).addTo(map);
+				L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+					attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+				}).addTo(map);
 
-			L.marker([position.coords.latitude, position.coords.longitude]).addTo(map)
+				markerGroup.addTo(map);
+			}
+			
+			markerGroup.clearLayers();
+			L.marker([position.coords.latitude, position.coords.longitude]).addTo(markerGroup)
 				.bindPopup('Your location')
 				.openPopup();
 		}
@@ -61,6 +70,7 @@
 				navigator.geolocation.getCurrentPosition(locSuccess, locError, { enableHighAccuracy: true, maximumAge: 0, timeout: Infinity });
 			}
 		}
+		getLocation();
 	</script>
 </body>
 
