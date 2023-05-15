@@ -8,8 +8,16 @@
 		main {
 			height: 100px;
 		}
+
 		#map {
 			height: calc(100% - 100px);
+		}
+
+		#btnGetLoc {
+			border-radius: 3px;
+			background-color: #009969;
+			color: white;
+			padding: 5px;
 		}
 	</style>
 </head>
@@ -18,17 +26,18 @@
 	<main>
 		<p>Geolocation test</p>
 		<p id="results">
-			Latitude: <span id="latitude"></span><br/>
-			Longitude: <span id="longitude"></span><br/>
+			Latitude: <span id="latitude"></span><br />
+			Longitude: <span id="longitude"></span><br />
 			Accuracy: <span id="accuracy"></span>
 		</p>
+		<button type="button" id="btnGetLoc">Fetch Location</button>
 	</main>
 	<div id="map"></div>
-	<script type="module"> 
+	<script type="module">
 		import leaflet from "https://cdn.jsdelivr.net/npm/leaflet@1.9.3/+esm";
 
 		function locSuccess(position) {
-			const fields = ['latitude','longitude','accuracy'];
+			const fields = ['latitude', 'longitude', 'accuracy'];
 
 			fields.forEach(field => {
 				document.getElementById(field).innerHTML = position.coords[field];
@@ -47,8 +56,10 @@
 		function locError(error) {
 			console.error(error);
 		}
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(locSuccess, locError, {enableHighAccuracy: true, maximumAge: 0, timeout: Infinity});
+		function getLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(locSuccess, locError, { enableHighAccuracy: true, maximumAge: 0, timeout: Infinity });
+			}
 		}
 	</script>
 </body>
