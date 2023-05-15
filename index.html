@@ -1,7 +1,20 @@
 <html>
-  <head>
-    <title>Geolocation test</title>
-  </head>
-  <body>
-  </body>
+
+<head>
+	<title>Geolocation test</title>
+</head>
+
+<body>
+	<p>Geolocation test</p>
+	<p id="results"></p>
+	<script>
+		function locSuccess(position) {
+			document.getElementById("results").innerText = JSON.stringify(position);
+		}
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(locSuccess, locError, {enableHighAccuracy: true, maximumAge: 0, timeout: 10000});
+		}
+	</script>
+</body>
+
 </html>
