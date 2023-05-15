@@ -38,7 +38,7 @@
 		import leaflet from "https://cdn.jsdelivr.net/npm/leaflet@1.9.3/+esm";
 
 		let map = null;
-		const markerGroup = L.markerGroup();
+		const markerGroup = L.layerGroup();
 
 		function locSuccess(position) {
 			const fields = ['latitude', 'longitude', 'accuracy'];
