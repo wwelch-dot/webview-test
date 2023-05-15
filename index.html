@@ -34,9 +34,8 @@
 		<button type="button" id="btnGetLoc" onclick="getLocation">Fetch Location</button>
 	</main>
 	<div id="map"></div>
-	<script type="module">
-		import leaflet from "https://cdn.jsdelivr.net/npm/leaflet@1.9.3/+esm";
-
+	<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.min.js"></script>
+	<script>
 		let map = null;
 		const markerGroup = L.layerGroup();
 
