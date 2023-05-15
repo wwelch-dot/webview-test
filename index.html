@@ -47,7 +47,7 @@
 			});
 
 			if (map == null) {
-				var map = leaflet.map('map').setView([position.coords.latitude, position.coords.longitude], 19);
+				map = leaflet.map('map').setView([position.coords.latitude, position.coords.longitude], 19);
 
 				L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 					attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
